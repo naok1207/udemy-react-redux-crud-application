@@ -52,3 +52,30 @@
         "Hello, world!"
       )
     ```
+
+### もっとJSX
+- JSXを用いるスコープにはReactのimportが必須
+- HTMLタグのclassはjavascriptのclassと被るためclassNameでないといけない
+- returnで返すJSXは一つでないといけない
+  - そのためdivで囲う
+    - 出したくないタグを出してしまう
+      - React.Flagment
+        - これに置き換えることによって一つのタグとすることができ問題が解消できる
+          ```
+          # 元
+          return (
+            <div>
+              <label htmlFor="bar">bar</label>
+              <input type="text" onClick={() => {console.log("I am clicked")}} />
+            </div>
+          )
+          ```
+          ```
+          # 変更後
+          return (
+            <React.Fragment>
+              <label htmlFor="bar">bar</label>
+              <input type="text" onClick={() => {console.log("I am clicked")}} />
+            </React.Fragment>
+          )
+          ```
