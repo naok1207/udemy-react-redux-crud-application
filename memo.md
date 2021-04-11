@@ -8,3 +8,5 @@
 - commit_template
   - テンプレートを用意して`git config --global commit.template /Users/<user>/<file>`により設定
 
+- gitによる検索
+  - `git grep <文字列>`
