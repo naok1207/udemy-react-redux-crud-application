@@ -79,3 +79,44 @@
             </React.Fragment>
           )
           ```
+
+### 13.トランスパイラー
+- JSXはトランスパイラーを用いてjavascriptに変換(トランスパイル)しなければ使えない
+- babel
+  - JSXからjavascriptに変換してくれるトランスパイラー
+  - babel repl
+    - babelによる変換をweb上で擬似技実行してくれる
+    - const (Es6)をvarに変換してくれるなど
+
+### 14.webpack
+- モジュールバンドラー
+  - ソースコードを束ねてweb上で利用できるようにするもの
+  - さまざまなライブラリやモジュールを使う人には必須なもの
+- https://webpack.js.org
+- app.jsとbar.jsをbundle.jsにまとめて実行できるようにする
+
+### 15.Component
+- 関数の定義によって作成するfanctional component
+  ```
+  const App = () => {
+    return (
+      <React.Fragment>
+        <label htmlFor="bar">bar</label>
+        <input type="text" onClick={() => {console.log("I am clicked")}} />
+      </React.Fragment>
+    )
+  }
+  ```
+- クラス定義によって作成するclass component
+  ```
+  class App extends Component {
+    render() {
+      return (
+        <React.Fragment>
+          <label htmlFor="bar">bar</label>
+          <input type="text" onClick={() => {console.log("I am clicked")}} />
+        </React.Fragment>
+      )
+    }
+  }
+  ```
