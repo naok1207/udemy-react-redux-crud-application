@@ -32,3 +32,23 @@
   - 変更したDOMを確認しなくてもいい(JQueryでは悩まされたらしい)
 
 ### 11.JSX
+- javascript XML
+- javascriptを拡張した言語
+- テンプレート言語の一つ
+- Reactを用いてHTMLを出力するための言語
+- facebook者が開発した
+- XMLやHTMLに似ているため非常に可読性が高い
+- トランスパイル
+  - javascriptのコードに変換される
+    ```
+    # JSX
+      return <div>Hello, world!</div>;
+    ```
+    ```
+    # javascript
+      return React.createElement(
+        "div",
+        null,
+        "Hello, world!"
+      )
+    ```
