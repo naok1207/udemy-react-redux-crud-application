@@ -146,3 +146,13 @@ User.defaultProps = {
   age: 1
 }
 ```
+
+### 16.prop-types
+- 型指定をすることができる
+- `isRequired`値が入っていないとエラー
+```
+User.propTypes = {
+  name: PropTypes.string,
+  age: PropTypes.number.isRequired
+}
+```
