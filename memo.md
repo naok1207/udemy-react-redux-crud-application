@@ -40,18 +40,18 @@
 - XMLやHTMLに似ているため非常に可読性が高い
 - トランスパイル
   - javascriptのコードに変換される
-    ```
-    # JSX
-      return <div>Hello, world!</div>;
-    ```
-    ```
-    # javascript
-      return React.createElement(
-        "div",
-        null,
-        "Hello, world!"
-      )
-    ```
+```
+# JSX
+  return <div>Hello, world!</div>;
+```
+```
+# javascript
+  return React.createElement(
+    "div",
+    null,
+    "Hello, world!"
+  )
+```
 
 ### もっとJSX
 - JSXを用いるスコープにはReactのimportが必須
@@ -61,24 +61,24 @@
     - 出したくないタグを出してしまう
       - React.Flagment
         - これに置き換えることによって一つのタグとすることができ問題が解消できる
-          ```
-          # 元
-          return (
-            <div>
-              <label htmlFor="bar">bar</label>
-              <input type="text" onClick={() => {console.log("I am clicked")}} />
-            </div>
-          )
-          ```
-          ```
-          # 変更後
-          return (
-            <React.Fragment>
-              <label htmlFor="bar">bar</label>
-              <input type="text" onClick={() => {console.log("I am clicked")}} />
-            </React.Fragment>
-          )
-          ```
+```
+# 元
+return (
+  <div>
+    <label htmlFor="bar">bar</label>
+    <input type="text" onClick={() => {console.log("I am clicked")}} />
+  </div>
+)
+```
+```
+# 変更後
+return (
+  <React.Fragment>
+    <label htmlFor="bar">bar</label>
+    <input type="text" onClick={() => {console.log("I am clicked")}} />
+  </React.Fragment>
+)
+```
 
 ### 13.トランスパイラー
 - JSXはトランスパイラーを用いてjavascriptに変換(トランスパイル)しなければ使えない
@@ -97,8 +97,20 @@
 
 ### 15.Component
 - 関数の定義によって作成するfanctional component
-  ```
-  const App = () => {
+```
+const App = () => {
+  return (
+    <React.Fragment>
+      <label htmlFor="bar">bar</label>
+      <input type="text" onClick={() => {console.log("I am clicked")}} />
+    </React.Fragment>
+  )
+}
+```
+- クラス定義によって作成するclass component
+```
+class App extends Component {
+  render() {
     return (
       <React.Fragment>
         <label htmlFor="bar">bar</label>
@@ -106,17 +118,31 @@
       </React.Fragment>
     )
   }
-  ```
-- クラス定義によって作成するclass component
-  ```
-  class App extends Component {
-    render() {
-      return (
-        <React.Fragment>
-          <label htmlFor="bar">bar</label>
-          <input type="text" onClick={() => {console.log("I am clicked")}} />
-        </React.Fragment>
-      )
-    }
-  }
-  ```
+}
+```
+
+### 16.props
+- propsとはコンポーネントの属性のこと
+- props.nameなどある属性に対し参照できるもの
+- 変数、オブジェクト、関数なんでも入る
+- 以下のエラーが表示された場合はindexを用いて修正するのがベストプラクティス
+```
+index.js:1 Warning: Each child in a list should have a unique "key" prop.
+```
+```
+profiles.map((profile, index) => {
+  return <User name={profile.name} age={profile.age} key={index} />
+})
+```
+
+- defaultProps
+  - `{ name: "Noname" }`などのように値を与えなかった場合に発生
+```
+const User = (props) => {
+  return <div>Hi, I am {props.name}, and {props.age} years old!</div>
+}
+
+User.defaultProps = {
+  age: 1
+}
+```
