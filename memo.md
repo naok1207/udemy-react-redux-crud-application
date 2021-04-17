@@ -215,3 +215,31 @@ User.propTypes = {
 
 ### 23.connectでstateとactionsとの関連づけを行う
 - コンポーネント側でstoreとActionを関連付けてView側で発生するイベントに対して実際に状態を変化させる
+- connect関数
+  - react-reduxが提供する
+  - 作成したStateやActionとコンポーネントとの関連づけを行ってViewのイベントで状態を遷移させて、遷移後の画面を再描画する
+- Action creater
+- App.jsでのstateの初期化が必要なくなる
+- Actioncreatorから適切な状態変化を行うことでhandlePlusButton, handlePlusButtonが必要なくなる
+- インスタンスのpropsには状態やアクションを渡していくため変数に渡す
+  - `const props = this.props`
+- stateとactionをコンポーネントに関連づける
+- connect関数
+  - `export default connect(mapStateToProps, mapDispatchToProps)(App)`
+    - mapStateToProps
+      - stateの情報からこのコンポーネントで必要なものを取り出してコンポーネントないのpropsとしてmappingする機能を持つ関数
+        - 引数 
+          - 状態のトップレベルを示すstateを書いてどういったオブジェクトをpropsとして対応させるのかということを関数の戻り値として定義する
+    - mapDispatchToProps
+      - あるActionが発生した時にreducerにtypeに応じた状態遷移を実行させるための関数
+
+```
+これと
+const mapDispatchToProps = dispatch => ({
+  increment: () => dispatch(increment()),
+  decrement: () => dispatch(decrement())
+})
+
+これは同じ
+const mapDispatchToProps = ({ increment, decrement })
+```
