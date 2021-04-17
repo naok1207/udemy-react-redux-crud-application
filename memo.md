@@ -196,4 +196,22 @@ User.propTypes = {
     - `import { INCREMENT, DECREMENT } from '../actions'`
   - 状態の初期値はオブジェクトとする
     - `export default (state = initialState, action) => {`により初期値を作成した初期値を設定する
-    
+
+### 22.Store
+- reducerを元にStoreを作成
+  - Storeがアプリケーション内の全てのコンポーネントで使用できるようにする
+- `Provider`
+  - react-reduxで提供されているコンポーネント
+    - 作成したStoreを全コンポーネントに渡す機能がある
+- AppComponent
+  - ディレクトリを作成した方が整理しやすくなる
+  - `git mv src/App.js src/components/`
+- `const store = createStore(reducer)`
+  - アプリケーションで唯一のstoreを作成する
+    - 全てのstateがここに集約される
+      - `Provider`により全てのコンポーネントから参照できるようにする
+        - 既存のコンポーネントをProviderコンポーネントでラップしてstoreと言う属性に作成したstoreを渡す
+          - 従来であればComponentをpropsを利用して子のコンポーネントへ渡してやらなければいけなかったがProviderにより改善された
+
+### 23.connectでstateとactionsとの関連づけを行う
+- コンポーネント側でstoreとActionを関連付けてView側で発生するイベントに対して実際に状態を変化させる
