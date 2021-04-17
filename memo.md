@@ -182,3 +182,18 @@ User.propTypes = {
     - 内部でtypeとtypeに対応する値を持つのが特徴
     - typeがユニークでないといけない
   - Actionを返すことをアクションクリエーターと呼ぶ
+
+### 21.Reducer
+- Actionが発生した時にActionに組み込まれているtypeに応じて状態をどう変化せるのかを定義するもの
+  - 状態 State 
+- index.js
+  - アプリケーション内に存在する全てのreducerを統括する
+    - `import { combineReducers } from 'redux'`によりReducerをimport
+    - `export default combineReducers({ count })`により出力
+- count.js
+  - カウントするreducer
+  - 前回作成したActionを読み込む
+    - `import { INCREMENT, DECREMENT } from '../actions'`
+  - 状態の初期値はオブジェクトとする
+    - `export default (state = initialState, action) => {`により初期値を作成した初期値を設定する
+    
