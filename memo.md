@@ -185,7 +185,7 @@ User.propTypes = {
 
 ### 21.Reducer
 - Actionが発生した時にActionに組み込まれているtypeに応じて状態をどう変化せるのかを定義するもの
-  - 状態 State 
+  - 状態 State
 - index.js
   - アプリケーション内に存在する全てのreducerを統括する
     - `import { combineReducers } from 'redux'`によりReducerをimport
@@ -228,7 +228,7 @@ User.propTypes = {
   - `export default connect(mapStateToProps, mapDispatchToProps)(App)`
     - mapStateToProps
       - stateの情報からこのコンポーネントで必要なものを取り出してコンポーネントないのpropsとしてmappingする機能を持つ関数
-        - 引数 
+        - 引数
           - 状態のトップレベルを示すstateを書いてどういったオブジェクトをpropsとして対応させるのかということを関数の戻り値として定義する
     - mapDispatchToProps
       - あるActionが発生した時にreducerにtypeに応じた状態遷移を実行させるための関数
@@ -345,3 +345,43 @@ renderEvents() {
   ))
 }
 ```
+
+### 33.イベント新規作成画面への画面遷移を実装する
+- react-router-dom
+  - `yarn add react-router-dom`
+  - リンク機能を有するパッケージ
+  - BrowserRouter, Route, Switchによりコンポーネント間での分岐を行った
+```
+<BrowserRouter>
+  <Switch>
+    <Route exact path="/events/new" component={EventsNew} />
+    <Route exact path="/" component={EventsIndex} />
+  </Switch>
+</BrowserRouter>
+```
+- redux-form
+  - `yarn add redux-form`
+  - 入力フォーム
+
+
+### 34.イベント新規作成画面のコンポーネントをreduxFormでdecorateする
+- renderField
+  - fieldのあたいが渡って来る
+  - さまざまな値を取得できる
+     - input label typeなどなど
+
+### 35.APIサーバにイベント新規作成要求を送信する
+- touched
+  - redux特有
+    - 一度触ったら
+
+### 36.送信ボタンのdisabled状態を調整する
+- submitボタンのカスタマイズ方法をもう少し進める
+- pristine
+  - なにもされていないことを示す属性(状態)
+    - `<input type="submit" value="Submit" disabled={pristine} />`
+- submitting 状態
+  - submitボタンを押した後に非活性にする
+  - submitしたらtrueになる
+    - submittingとpristineを利用して
+      - `<input type="submit" value="Submit" disabled={pristine || submitting} />`
