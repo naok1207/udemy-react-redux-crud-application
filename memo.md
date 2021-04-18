@@ -243,3 +243,105 @@ const mapDispatchToProps = dispatch => ({
 これは同じ
 const mapDispatchToProps = ({ increment, decrement })
 ```
+
+## 実践編
+### 24.イントロダクション
+- 外部サービスと連携するreactアプリケーションの作成
+- CRUDを実装することがゴール
+
+### 25.登場人物(Client, static File Server, API Server)
+- Client
+  - ブラウザ
+- static File Server
+  - FireBaseで運用しているファイルサーバー
+- API Server
+  - herokuで運用しているrailsアプリケーション
+
+- reactアプリケーションの取得
+
+### 26.React CRUDアプリケーションの仕様
+
+### 27.ReactアプリケーションとAPIサーバ菅野ネットワーク上のデータの流れ - 全データ取得時
+### 28.ReactアプリケーションとAPIサーバ菅野ネットワーク上のデータの流れ - 特定のデータ取得時、データ更新時
+### 29.ReactアプリケーションとAPIサーバ菅野ネットワーク上のデータの流れ - データ作成時、データ削除時
+
+### 30.APIサーバの仕様をcurlで確認する
+- データ全件取得
+`curl --request GET --url 'https://udemy-utils.herokuapp.com/api/v1/events?token=token123'`
+- データ1件取得
+`curl --request GET --url 'https://udemy-utils.herokuapp.com/api/v1/events/1?token=token123'`
+- データ作成
+```
+curl --request POST \
+     --url 'https://udemy-utils.herokuapp.com/api/v1/events?token=token123' \
+     --header 'Content-Type: application/json' \
+     --data '{
+       "title": "event 11",
+       "body": "body for event 11"
+     }'
+```
+- データ更新
+```
+curl --request PUT \
+     --url 'https://udemy-utils.herokuapp.com/api/v1/events/1?token=token123' \
+     --header 'Content-Type: application/json' \
+     --data '{
+       "title": "changed title",
+       "body": "changed body"
+     }'
+```
+- データ削除
+```
+curl --request DELETE \
+      --url 'https://udemy-utils.herokuapp.com/api/v1/events/1?token=token123' \
+     --header 'Content-Type: application/json'
+```
+
+### 31.アクションでイベント一覧を取得する
+- axios
+  - `yarn add axios`
+  - httpリクエストを送るためのライブラリ
+    - APIサーバに対してリクエストを投げる
+    - HTTPリクエストを送る
+  - 戻り値Promise
+    - async, awaitを使ってデータを扱う
+- redux-thunk
+  - `yarn add redux-thunk`
+  - ミドルウェア
+    - `import { applyMiddleware } from 'redux'`
+      - ミドルウェアを適用するための関数
+      - createStoreの第二引数にわたす(thunk)
+        - storeに組み込まれる
+  - reduxのアクションクリエイターに非同期処理を実装するためのライブラリ
+  - action creater が actionの代わりに関数を返すことができるようになる
+- componentDidMound
+  - コンポーネントがマウントされた時に呼ばれるメソッド
+- 初期マウント時外部のAPIにリクエストを投げデータを取得する
+- readEvents
+  - データを取得する
+    - リクエストを投げる処理
+
+### 32.イベントを取得する
+- 前
+  - HTTPクライアントを仕様して外部のAPIサーバに対してイベント一覧の取得を行った
+    - 一覧情報をActionで取得して
+      - reducerに対してdispatchを実行するところまで実装できた
+- 今回
+  - dispatchを受けreducerの実装を行う
+  - event一覧の表示をする
+
+- lodash
+  - `import _ from 'lodash'`
+    - `_.mapKeys(action.response.data, 'id')`
+  - 繰り返し
+```
+renderEvents() {
+  return _.map(this.props.events, event => (
+    <tr>
+      <td>{event.id}</td>
+      <td>{event.title}</td>
+      <td>{event.body}</td>
+    </tr>
+  ))
+}
+```
