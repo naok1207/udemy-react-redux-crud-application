@@ -385,3 +385,59 @@ renderEvents() {
   - submitしたらtrueになる
     - submittingとpristineを利用して
       - `<input type="submit" value="Submit" disabled={pristine || submitting} />`
+
+- commitをまとめる
+  - 余分なcommitがあるとcommitがみづらくなるためrebaseでまとめる
+```
+$ git rebase -i HEAD~3 # 過去3つのcommitを修正する(vimがひらく)
+```
+```
+# このように表示されるので
+pick bbc4ceb implement event new component
+pick 66cb23d update
+
+# このように変更する
+pick bbc4ceb implement event new component
+f 66cb23d update
+```
+
+### 37.Redux DevToolsを導入しデバッグし易い環境を整える
+- イベントの更新や削除を行う
+- redux-devtools-extension
+  - デバッグ用のツール
+
+### 38.イベント更新画面用のコンポーネントを作成する
+- component
+- connect
+  - redux使うから
+- field, reduxForm
+- Link
+  - cancelリンクのため
+- getEvent
+  - イベントに関する情報を取得
+- deleteEvent
+  - 削除ボタンをおくため
+- putEvent
+  - 更新のため
+
+### 39.イベントの削除機能を実装する
+- ...events
+  - スプレッド演算子
+
+### 40.イベントの詳細情報を更新画面に表示する
+
+### 41.イベント更新機能を実装する
+
+### 42.Material-UI概説
+
+### 43.注意喚起
+
+### 44.Material-UIの適用(一覧画面)
+
+### 45.Material-UIの適用(新規作成画面、編集画面)
+
+### 46.React v16.3 Context API
+
+### 47.質問 redux-formのenablReintializeについて
+
+### 48.おわりのご挨拶
